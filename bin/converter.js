@@ -62,10 +62,17 @@ try {
             }
 
             var paperSize = {
-                format: options.format,
-                orientation: options.orientation,
                 border: options.border
             };
+            if (options.format && options.orientation) {
+                paperSize.format = options.format;
+                paperSize.orientation = options.orientation;
+            } else if (options.height && options.width) {
+                paperSize.height = options.height;
+                paperSize.width = options.width;
+            } else {
+                throw 'Either page format and orientation, or width and height must be set';
+            }
 
             // If we enable custom footer per page, evaluate it
             if (options.allowParseCustomFooter || options.allowParseCustomHeader) {
