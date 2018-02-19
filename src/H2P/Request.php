@@ -96,13 +96,13 @@ class Request
      * @param array $cookies
      * @param array $params
      */
-    public function __construct($uri, $method = null, $params = null, $headers = null, $cookies = null)
+    public function __construct($uri, $method = null, $params = null, $headers = null, $cookies = array())
     {
         $this->setUri($uri);
         $this->setMethod($method ?: self::METHOD_GET);
         $headers and $this->headers = $headers;
         $params and $this->params = $params;
-        if (count($cookies)) {
+        if (is_array($cookies) && count($cookies)) {
             $this->addCookies($cookies);
         }
     }
